@@ -1,0 +1,13 @@
+<table xmlns:th="http://www.w3.org/1999/xhtml">
+    <body>
+    <table>
+        <tr>
+            <th th:text="${success}"></th>
+        </tr>
+
+        <tr th:each="user: ${users}">
+            <td th:text="${user.name}"></td>
+        </tr>
+    </table>
+    </body>
+</table>
