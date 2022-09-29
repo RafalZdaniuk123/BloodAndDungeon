@@ -8,9 +8,9 @@ import java.util.UUID;
 
 public class UserMapper implements RowMapper {
     @Override
-    public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+    public User mapRow(ResultSet rs, int rowNum) throws SQLException {
         return User.builder()
-                .id(rs.getObject("id", UUID.class))
+                .id(rs.getInt("id"))
                 .username(rs.getString("SURNAME"))
                 .password(rs.getString("PASSWORD"))
                 .characterClass(CharacterClass.valueOf(rs.getString("CHARACTERCLASS")))

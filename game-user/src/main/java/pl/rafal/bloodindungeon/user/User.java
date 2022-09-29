@@ -2,15 +2,14 @@ package pl.rafal.bloodindungeon.user;
 
 import lombok.*;
 
-import java.util.UUID;
-
 @Getter
 @Setter
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-    private UUID id;
+    private Integer id;
     private String username;
     private String password;
     private CharacterClass characterClass;
