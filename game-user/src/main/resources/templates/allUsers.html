@@ -1,6 +1,46 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Nowa strona</title>
+
+
+    <style>
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
+#pole{
+width: 400px;
+height: 300px;
+background-color: blue;
+margin: 25%;
+
+}
+
+    </style>
+</head>
+
 <body>
 <p>All Users List</p>
 <table>
@@ -11,5 +51,42 @@
         <td th:text="${user.username}"/>
     </tr>
 </table>
+
+
+
+
+<div id="pole">
+
+    <table id="customers">
+        <tr>
+            <th>
+                Imie
+            </th>
+            <th>
+                <a href="add">Link do google</a>
+            </th>
+            <th>
+                Płeć
+            </th>
+        </tr>
+        <tr>
+            <td>
+                Jan
+            </td>
+            <td>
+                <button>Kowalski click</button>
+            </td>
+            <td>
+                M
+            </td>
+        </tr>
+    </table>
+
+</div>
 </body>
-</html>
+
+
+
+
+
+

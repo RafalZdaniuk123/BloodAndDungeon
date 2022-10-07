@@ -18,6 +18,10 @@ public class UserController {
 
     private final UserService userService;
 
+    @GetMapping("/add")
+    String saveUserPage(){
+        return "saveForm";
+    }
     @PostMapping("/add")
     String saveUser(User user, Model model){
         userService.saveUser(user);
