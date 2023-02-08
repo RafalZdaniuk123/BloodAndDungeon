@@ -3,10 +3,7 @@ package pl.rafal.bloodindungeon.user;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -22,9 +19,10 @@ public class UserController {
     String saveUserPage(){
         return "saveForm";
     }
+
     @PostMapping("/add")
-    String saveUser(User user, Model model){
-        userService.saveUser(user);
+    String saveUser(@RequestParam String surname, @RequestParam String characterClass, Model model){
+        userService.saveUser(surname, characterClass);
         model.addAttribute("success", "User added successfully");
         model.addAttribute("users", userService.getAllUsers());
         return "allUsers";
@@ -45,14 +43,13 @@ public class UserController {
         return "allUsers";
     }
 
-    @PostMapping("/update")
-    String updateUser(Model model, UUID userId, User user){
-        userService.saveUser(user);
-        model.addAttribute("users", userService.getAllUsers());
-        return "allUsers";
-    }
+//    @PostMapping("/update")
+//    String updateUser(Model model, UUID userId, User user){
+//        userService.saveUser(user);
+//        model.addAttribute("users", userService.getAllUsers());
+//        return "allUsers";
+//    }
 
-//
 //    @PostMapping("/registration")
 //    String registerUser(Model model, RegistrationUser registrationUser){
 //        userService.registerUser(registrationUser);
