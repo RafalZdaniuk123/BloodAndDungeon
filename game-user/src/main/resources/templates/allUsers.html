@@ -1,47 +1,12 @@
-<!DOCTYPE html>
+<!DOCTYPE html >
 
 <html xmlns:th="http://www.thymeleaf.org">
-
+<title>All Users List</title>
 <head>
-    <title>Nowa strona</title>
 
-
-    <style>
-#customers {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-#customers td, #customers th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-#customers tr:nth-child(even){background-color: #f2f2f2;}
-
-#customers tr:hover {background-color: #ddd;}
-
-#customers th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #04AA6D;
-  color: white;
-}
-
-#pole{
-width: 400px;
-height: 300px;
-background-color: blue;
-margin: 25%;
-
-}
-
-    </style>
 </head>
-
 <body>
+
 <p>All Users List</p>
 <table>
     <tr>
@@ -53,37 +18,41 @@ margin: 25%;
 </table>
 
 
+<div>
 
-
-<div id="pole">
-
-    <table id="customers">
+    <table>
         <tr>
             <th>
-                Imie
+                name
             </th>
             <th>
-                <a href="add">Link do google</a>
+                character class
             </th>
             <th>
-                Płeć
+                level
+            </th>
+            <th>
+                exp
             </th>
         </tr>
-        <tr>
-            <td>
-                Jan
-            </td>
-            <td>
-                <button>Kowalski click</button>
-            </td>
-            <td>
-                M
-            </td>
+        <tr th:each="user: ${users}">
+
+                <td th:text="${user.username}"/></td>
+
+            <td th:text="${user.characterClass}"/></td>
+
+            <td th:text="${user.userLvl}"/></td>
+
+            <td th:text="${user.exp}"/></td>
+
         </tr>
     </table>
 
 </div>
+
+
 </body>
+</html>
 
 
 

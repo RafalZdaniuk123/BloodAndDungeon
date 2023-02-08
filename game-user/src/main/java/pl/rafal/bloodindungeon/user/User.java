@@ -15,7 +15,7 @@ public class User {
     private CharacterClass characterClass;
     private int userLvl;
     private Double userBalance;
-    private int Exp;
+    private int exp;
     private int hp;
     private int attack;
     private int defence;

@@ -16,7 +16,7 @@ public class UserMapper implements RowMapper {
                 .characterClass(CharacterClass.valueOf(rs.getString("CHARACTERCLASS")))
                 .userLvl(rs.getInt("USERLVL"))
                 .userBalance(rs.getDouble("USERBALANCE"))
-                .Exp(rs.getInt("EXP"))
+                .exp(rs.getInt("EXP"))
                 .hp(rs.getInt("HP"))
                 .attack(rs.getInt("ATTACK"))
                 .defence(rs.getInt("DEFENCE"))

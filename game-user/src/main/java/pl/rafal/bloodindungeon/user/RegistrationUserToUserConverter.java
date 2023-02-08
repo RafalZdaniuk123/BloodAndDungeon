@@ -10,7 +10,7 @@ public class RegistrationUserToUserConverter {
                 .intelligence(1)
                 .hp(100)
                 .defence(1)
-                .Exp(100)
+                .exp(100)
                 .userBalance(Double.valueOf(100))
                 .userLvl(1)
                 .attack(10)
