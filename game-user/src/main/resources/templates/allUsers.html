@@ -1,13 +1,61 @@
-<table xmlns:th="http://www.w3.org/1999/xhtml">
-    <body>
+<!DOCTYPE html >
+
+<html xmlns:th="http://www.thymeleaf.org">
+<title>All Users List</title>
+<head>
+
+</head>
+<body>
+
+<p>All Users List</p>
+<table>
+    <tr>
+        <th th:text="${success}"></th>
+    </tr>
+    <tr th:each="user: ${users}">
+        <td th:text="${user.username}"/>
+    </tr>
+</table>
+
+
+<div>
+
     <table>
         <tr>
-            <th th:text="${success}"></th>
+            <th>
+                name
+            </th>
+            <th>
+                character class
+            </th>
+            <th>
+                level
+            </th>
+            <th>
+                exp
+            </th>
         </tr>
-
         <tr th:each="user: ${users}">
-            <td th:text="${user.name}"></td>
+
+                <td th:text="${user.username}"/></td>
+
+            <td th:text="${user.characterClass}"/></td>
+
+            <td th:text="${user.userLvl}"/></td>
+
+            <td th:text="${user.exp}"/></td>
+
         </tr>
     </table>
-    </body>
-</table>
+
+</div>
+
+
+</body>
+</html>
+
+
+
+
+
+
