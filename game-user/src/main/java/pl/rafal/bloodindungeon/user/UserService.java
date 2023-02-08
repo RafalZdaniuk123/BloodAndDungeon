@@ -12,11 +12,11 @@ public class UserService {
 
     private final UserDao userDao;
 
-    List<User> getAllUsers(){
+    public List<User> getAllUsers(){
         return userDao.getAllUsers();
     }
 
-    User getUserById(UUID id){
+    User getUserById(int id){
         return userDao.getUserById(id);
     }
 
@@ -24,11 +24,11 @@ public class UserService {
         return userDao.getUserByUsername(username);
     }
 
-    void saveUser(User user){
+    public void saveUser(User user){
         userDao.saveUser(user);
     }
 
-    void deleteUser(UUID id){
+    public void deleteUser(int id){
         userDao.deleteUserById(id);
     }
 

@@ -9,17 +9,8 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
-    private int id;
+public class RegistrationUser {
     private String username;
     private String password;
     private CharacterClass characterClass;
-    private int userLvl;
-    private Double userBalance;
-    private int exp;
-    private int hp;
-    private int attack;
-    private int defence;
-    private int intelligence;
-
 }

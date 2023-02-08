@@ -1,11 +1,13 @@
 package pl.rafal.bloodindungeon.user;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.List;
 import java.util.UUID;
 
+@Repository
 public class UserJdbcDao implements UserDao {
     private final JdbcTemplate jdbcTemplate;
 
@@ -23,7 +25,7 @@ public class UserJdbcDao implements UserDao {
     }
 
     @Override
-    public User getUserById(UUID id) {
+    public User getUserById(int id) {
         return null;
     }
 
@@ -38,7 +40,7 @@ public class UserJdbcDao implements UserDao {
     }
 
     @Override
-    public void deleteUserById(UUID id) {
+    public void deleteUserById(int id) {
 
     }
 
@@ -48,17 +50,17 @@ public class UserJdbcDao implements UserDao {
     }
 
     @Override
-    public Double getUserBalance(UUID id) {
+    public Double getUserBalance(int id) {
         return null;
     }
 
     @Override
-    public int getUserLevel(UUID id) {
+    public int getUserLevel(int id) {
         return 0;
     }
 
     @Override
-    public String getUserCharacterClass(UUID id) {
+    public String getUserCharacterClass(int id) {
         return null;
     }
 }

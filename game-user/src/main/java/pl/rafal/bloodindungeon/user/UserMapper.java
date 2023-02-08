@@ -10,13 +10,13 @@ public class UserMapper implements RowMapper {
     @Override
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
         return User.builder()
-                .id(rs.getObject("id", UUID.class))
-                .username(rs.getString("SURNAME"))
+                .id(rs.getInt("id"))
+                .username(rs.getString("USERNAME"))
                 .password(rs.getString("PASSWORD"))
                 .characterClass(CharacterClass.valueOf(rs.getString("CHARACTERCLASS")))
                 .userLvl(rs.getInt("USERLVL"))
                 .userBalance(rs.getDouble("USERBALANCE"))
-                .Exp(rs.getInt("EXP"))
+                .exp(rs.getInt("EXP"))
                 .hp(rs.getInt("HP"))
                 .attack(rs.getInt("ATTACK"))
                 .defence(rs.getInt("DEFENCE"))

@@ -7,10 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-@Repository
 public class UserInMemoryDaoImpl implements UserDao {
 
-    Map<UUID, User> users = new HashMap<>();
+    Map<Integer, User> users = new HashMap<>();
 
     @Override
     public List<User> getAllUsers() {
@@ -18,7 +17,7 @@ public class UserInMemoryDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUserById(UUID id) {
+    public User getUserById(int id) {
         return users.get(id);
     }
 
@@ -39,7 +38,7 @@ public class UserInMemoryDaoImpl implements UserDao {
 
 
     @Override
-    public void deleteUserById(UUID id) {
+    public void deleteUserById(int id) {
         users.remove(id);
     }
 
@@ -54,21 +53,22 @@ public class UserInMemoryDaoImpl implements UserDao {
     }
 
     @Override
-    public Double getUserBalance(UUID id) {
+    public Double getUserBalance(int id) {
         return users.get(id).getUserBalance();
     }
 
     @Override
-    public int getUserLevel(UUID id) {
+    public int getUserLevel(int id) {
         return users.get(id).getUserLvl();
     }
 
     @Override
-    public String getUserCharacterClass(UUID id) {
+    public String getUserCharacterClass(int id) {
         return users.get(id).getCharacterClass().toString();
     }
 
-    private UUID getId() {
-        return UUID.randomUUID();
+    // TODO Zrobić jakieś wczytywanie sekwencji
+    private int getId() {
+        return 2;
     }
 }
