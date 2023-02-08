@@ -2,13 +2,15 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 
+
 <head>
     <title>All Users List</title>
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
-</head>
+<head>
+
 <body>
 
 <p>All Users List</p>
@@ -16,6 +18,20 @@
 <div>
 
     <table class="table table-responsive table-bordered table-striped">
+    
+<table>
+    <tr>
+        <th th:text="${success}"></th>
+    </tr>
+    <tr th:each="user: ${users}">
+        <td th:text="${user.username}"/>
+    </tr>
+</table>
+
+
+<div>
+
+    <table>
         <tr>
             <th>
                 name
@@ -31,7 +47,6 @@
             </th>
         </tr>
         <tr th:each="user: ${users}">
-
             <td th:text="${user.username}"/>
             </td>
 
@@ -43,6 +58,13 @@
 
             <td th:text="${user.exp}"/>
             </td>
+                <td th:text="${user.username}"/></td>
+
+            <td th:text="${user.characterClass}"/></td>
+
+            <td th:text="${user.userLvl}"/></td>
+
+            <td th:text="${user.exp}"/></td>
 
         </tr>
     </table>

@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -16,11 +15,12 @@ public class UserService {
         return userDao.getAllUsers();
     }
 
-    User getUserById(int id){
+
+    User getUserById(int id) {
         return userDao.getUserById(id);
     }
 
-    User getUserByUsername(String username){
+    User getUserByUsername(String username) {
         return userDao.getUserByUsername(username);
     }
 
@@ -32,4 +32,8 @@ public class UserService {
         userDao.deleteUserById(id);
     }
 
+    void registerUser(RegistrationUser registrationUser) {
+        User preparedNewUser = RegistrationUserToUserConverter.convert(registrationUser);
+        saveUser(preparedNewUser);
+    }
 }

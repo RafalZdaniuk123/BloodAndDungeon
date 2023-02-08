@@ -1,19 +1,18 @@
 package pl.rafal.bloodindungeon.user;
 
-import org.springframework.stereotype.Repository;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class UserInMemoryDaoImpl implements UserDao {
 
     Map<Integer, User> users = new HashMap<>();
 
+public class UserInMemoryDaoImpl implements UserDao {
+
+   List<User> users = new ArrayList<>();
+
     @Override
     public List<User> getAllUsers() {
-        return users.values().stream().toList();
+        return users.stream().toList();
     }
 
     @Override
@@ -23,7 +22,7 @@ public class UserInMemoryDaoImpl implements UserDao {
 
     @Override
     public User getUserByUsername(String username) {
-        for (User user : users.values()) {
+        for (User user : users) {
             if (user.getUsername().equals(username)) {
                 return user;
             }
@@ -33,7 +32,7 @@ public class UserInMemoryDaoImpl implements UserDao {
 
     @Override
     public void saveUser(User user) {
-        users.put(getId(), user);
+        users.add(user);
     }
 
 
@@ -44,7 +43,7 @@ public class UserInMemoryDaoImpl implements UserDao {
 
     @Override
     public void deleteUserByUsername(String username) {
-        for (User user : users.values()) {
+        for (User user : users) {
             if (user.getUsername().equals(username)) {
                 users.remove(user.getId());
             }
@@ -66,7 +65,6 @@ public class UserInMemoryDaoImpl implements UserDao {
     public String getUserCharacterClass(int id) {
         return users.get(id).getCharacterClass().toString();
     }
-
     // TODO Zrobić jakieś wczytywanie sekwencji
     private int getId() {
         return 2;

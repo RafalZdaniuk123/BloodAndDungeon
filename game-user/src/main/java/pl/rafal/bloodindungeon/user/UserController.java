@@ -51,6 +51,7 @@ public class UserController {
         model.addAttribute("users", userService.getAllUsers());
         return "allUsers";
     }
+
 //
 //    @PostMapping("/registration")
 //    String registerUser(Model model, RegistrationUser registrationUser){
