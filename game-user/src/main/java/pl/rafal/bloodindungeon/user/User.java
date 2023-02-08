@@ -9,7 +9,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-    private Integer id;
+
+    private int id;
     private String username;
     private String password;
     private CharacterClass characterClass;

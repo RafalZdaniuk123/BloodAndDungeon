@@ -4,6 +4,10 @@ import java.util.*;
 
 public class UserInMemoryDaoImpl implements UserDao {
 
+    Map<Integer, User> users = new HashMap<>();
+
+public class UserInMemoryDaoImpl implements UserDao {
+
    List<User> users = new ArrayList<>();
 
     @Override
@@ -61,5 +65,8 @@ public class UserInMemoryDaoImpl implements UserDao {
     public String getUserCharacterClass(int id) {
         return users.get(id).getCharacterClass().toString();
     }
-
+    // TODO Zrobić jakieś wczytywanie sekwencji
+    private int getId() {
+        return 2;
+    }
 }
