@@ -4,10 +4,6 @@ import java.util.*;
 
 public class UserInMemoryDaoImpl implements UserDao {
 
-    Map<Integer, User> users = new HashMap<>();
-
-public class UserInMemoryDaoImpl implements UserDao {
-
    List<User> users = new ArrayList<>();
 
     @Override
