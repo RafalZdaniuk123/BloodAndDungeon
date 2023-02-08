@@ -43,20 +43,20 @@ public class UserJdbcDao implements UserDao {
 
     @Override
     public void saveUser(User user) {
-        String sql = "INSERT INTO user (SURNAME, PASSWORD, CHARACTERCLASS, USERLVL, USERBALANCE, EXP, HP, ATTACK, DEFENCE, INTELLIGENCE)" +
+        String sql = "INSERT INTO user (USERNAME, PASSWORD, CHARACTERCLASS, USERLVL, USERBALANCE, EXP, HP, ATTACK, DEFENCE, INTELLIGENCE)" +
                 " VALUES (:username,:password,:characterClass,:userLvl,:userBalance,:exp,:hp,:attack,:defence,:intelligence)";
 
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("username", user.getUsername());
-        params.addValue("password", user.getUsername());
-        params.addValue("characterClass", user.getUsername());
-        params.addValue("userLvl", user.getUsername());
-        params.addValue("userBalance", user.getUsername());
-        params.addValue("exp", user.getUsername());
-        params.addValue("hp", user.getUsername());
-        params.addValue("attack", user.getUsername());
-        params.addValue("defence", user.getUsername());
-        params.addValue("intelligence", user.getUsername());
+        params.addValue("password", user.getPassword());
+        params.addValue("characterClass", user.getCharacterClass().toString());
+        params.addValue("userLvl", user.getUserLvl());
+        params.addValue("userBalance", user.getUserBalance());
+        params.addValue("exp", user.getExp());
+        params.addValue("hp", user.getHp());
+        params.addValue("attack", user.getAttack());
+        params.addValue("defence", user.getDefence());
+        params.addValue("intelligence", user.getIntelligence());
 
         jdbcTemplate.update(sql, params);
     }
