@@ -2,6 +2,8 @@ package pl.rafal.bloodindungeon.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.rafal.bloodindungeon.user.exception.DaoException;
+import pl.rafal.bloodindungeon.user.exception.ServiceLayerException;
 
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class UserService {
         return userDao.getUserByUsername(username);
     }
 
-    public void saveUser(String username, String characterClass) {
+    public void saveUser(String username, String characterClass) throws ServiceLayerException {
         User user = User.builder()
                 .username(username)
                 .characterClass(CharacterClass.valueOf(characterClass))
@@ -38,11 +40,15 @@ public class UserService {
                 // only for tests
                 .password("password")
                 .build();
-        userDao.saveUser(user);
+        try {
+            userDao.saveUser(user);
+        } catch (DaoException ex) {
+            throw new ServiceLayerException(ex.getMessage());
+        }
     }
 
-    public void deleteUser(int id) {
-        userDao.deleteUserById(id);
+    public boolean deleteUser(int id) {
+        return userDao.deleteUserById(id);
     }
 
 //    void registerUser(RegistrationUser registrationUser) {

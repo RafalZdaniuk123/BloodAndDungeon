@@ -4,11 +4,11 @@ import java.util.*;
 
 public class UserInMemoryDaoImpl implements UserDao {
 
-   List<User> users = new ArrayList<>();
+    Map<Integer, User> users = new HashMap<>();
 
     @Override
     public List<User> getAllUsers() {
-        return users.stream().toList();
+        return users.values().stream().toList();
     }
 
     @Override
@@ -18,7 +18,8 @@ public class UserInMemoryDaoImpl implements UserDao {
 
     @Override
     public User getUserByUsername(String username) {
-        for (User user : users) {
+        List<User> usersList = users.values().stream().toList();
+        for (User user : usersList) {
             if (user.getUsername().equals(username)) {
                 return user;
             }
@@ -28,18 +29,23 @@ public class UserInMemoryDaoImpl implements UserDao {
 
     @Override
     public void saveUser(User user) {
-        users.add(user);
+        UUID uuid = UUID.randomUUID();
+        int id = Integer.getInteger(uuid.toString());
+        users.put(id,user);
     }
 
 
     @Override
-    public void deleteUserById(int id) {
+    public boolean deleteUserById(int id) {
         users.remove(id);
+        User user = users.get(id);
+        return user != null;
     }
 
     @Override
     public void deleteUserByUsername(String username) {
-        for (User user : users) {
+        List<User> usersList = users.values().stream().toList();
+        for (User user : usersList) {
             if (user.getUsername().equals(username)) {
                 users.remove(user.getId());
             }
@@ -61,6 +67,7 @@ public class UserInMemoryDaoImpl implements UserDao {
     public String getUserCharacterClass(int id) {
         return users.get(id).getCharacterClass().toString();
     }
+
     // TODO Zrobić jakieś wczytywanie sekwencji
     private int getId() {
         return 2;

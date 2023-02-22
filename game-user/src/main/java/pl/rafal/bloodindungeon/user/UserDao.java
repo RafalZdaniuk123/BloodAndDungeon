@@ -8,7 +8,7 @@ public interface UserDao {
     User getUserById(int id);
     User getUserByUsername(String username);
     void saveUser(User user);
-    void deleteUserById(int id);
+    boolean deleteUserById(int id);
     void deleteUserByUsername(String username);
     Double getUserBalance(int id);
     int getUserLevel(int id);
