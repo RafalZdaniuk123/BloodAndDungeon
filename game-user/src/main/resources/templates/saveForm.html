@@ -32,7 +32,10 @@
                     character class
                 </th>
                 <td>
-                    <input type="text" name="characterClass">
+                    <select name="characterClass" class="form-control" id="dropDownList">
+                        <option value="0">select option</option>
+                        <option th:each="classNames : ${classNames}" th:value="${classNames}" th:text="${classNames}"></option>
+                    </select>
                 </td>
             </tr>
             <tr>

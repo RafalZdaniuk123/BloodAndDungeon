@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import pl.rafal.bloodindungeon.user.exception.RecordNotFoundException;
+import pl.rafal.bloodindungeon.user.exception.SaveUserFailedException;
 
 
 import javax.sql.DataSource;
@@ -31,8 +32,9 @@ public class UserJdbcDao implements UserDao {
 
     @Override
     public User getUserById(int id) {
-        String sql = " SELECT * FROM user WHERE id=?";
-        return (User) jdbcTemplate.getJdbcOperations().query(sql, new UserMapper(), id);
+        String sql = " SELECT * FROM user WHERE id=:id";
+        MapSqlParameterSource param = new MapSqlParameterSource("id", id);
+        return jdbcTemplate.queryForObject(sql, param, new UserMapper());
     }
 
     @Override
@@ -58,13 +60,18 @@ public class UserJdbcDao implements UserDao {
         params.addValue("defence", user.getDefence());
         params.addValue("intelligence", user.getIntelligence());
 
-        jdbcTemplate.update(sql, params);
+        int update = jdbcTemplate.update(sql, params);
+        if (update != 1) {
+            throw new SaveUserFailedException(
+                    "User can't be saved. Number of operations is: " + update + " but expected 1");
+        }
     }
 
     @Override
-    public void deleteUserById(int id) {
+    public boolean deleteUserById(int id) {
         String sql = "DELETE FROM user WHERE id = ?";
-        jdbcTemplate.getJdbcOperations().update(sql, id);
+        int update = jdbcTemplate.getJdbcOperations().update(sql, id);
+        return update == 1;
     }
 
     // margin-left: 50% - połowa zdjęcia (1/2 image)
@@ -92,7 +99,7 @@ public class UserJdbcDao implements UserDao {
         SqlParameterSource param = new MapSqlParameterSource("id", id);
         return jdbcTemplate.query(sql, param, rs -> {
             if (rs.next()) {
-                int lvl = 0;
+                int lvl;
                 lvl = rs.getInt("USERLVL");
                 if (rs.wasNull()) {
                     lvl = 0;
