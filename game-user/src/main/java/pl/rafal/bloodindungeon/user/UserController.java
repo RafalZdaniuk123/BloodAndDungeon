@@ -9,7 +9,7 @@ import pl.rafal.bloodindungeon.user.exception.ServiceLayerException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+import java.util.Objects;
 
 @Slf4j
 @Controller
@@ -30,7 +30,12 @@ public class UserController {
     @PostMapping("/add")
     String saveUser(@RequestParam String surname, @RequestParam String characterClass, Model model) {
         try {
-            userService.saveUser(surname, characterClass);
+            if(Objects.equals(characterClass, "0")){
+                model.addAttribute("users", userService.getAllUsers());
+                model.addAttribute("success", "You need choose one of existing character class");
+                return "allUsers";
+            }
+            userService.saveUser(surname, characterClass, null);
             model.addAttribute("success", "User added successfully");
             log.info("User " + surname + " added succesfully");
         } catch (ServiceLayerException ex) {
@@ -44,7 +49,6 @@ public class UserController {
     @GetMapping("/getAll")
     String getAllUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
-        System.out.println(userService.getAllUsers());
         return "allUsers";
     }
 
@@ -70,11 +74,32 @@ public class UserController {
 //        model.addAttribute("users", userService.getAllUsers());
 //        return "allUsers";
 //    }
+    @GetMapping("/registration")
+    String registrationForm(Model model){
+        List<Enum<CharacterClass>> classNames = new ArrayList(List.of(CharacterClass.values()));
+        model.addAttribute("classNames", classNames);
+        return "registrationForm";
+    }
 
 //    @PostMapping("/registration")
-//    String registerUser(Model model, RegistrationUser registrationUser){
-//        userService.registerUser(registrationUser);
+//    String registerUser(Model model, @RequestBody RegistrationUser registrationUser) throws ServiceLayerException {
+//        System.out.println(registrationUser);
+//        userService.saveUser(registrationUser.getUsername(),
+//                registrationUser.getCharacterClass().toString(),
+//                registrationUser.getPassword());
 //        model.addAttribute("users", userService.getAllUsers());
 //        return "allUsers";
 //    }
+// Check how can I use Model in Request    @RequestModel
+    @PostMapping("/registration")
+    String registerUser(Model model,
+                        @RequestParam String username,
+                        @RequestParam String characterClass,
+                        @RequestParam String password) throws ServiceLayerException {
+        userService.saveUser(username,
+                characterClass,
+                password);
+        model.addAttribute("users", userService.getAllUsers());
+        return "allUsers";
+    }
 }
