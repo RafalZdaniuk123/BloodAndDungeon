@@ -1,0 +1,69 @@
+<!DOCTYPE html >
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <title>Register User</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <head>
+
+<body>
+
+<p>Register new user</p>
+
+<div>
+    <form action="/user/registration" method="post">
+
+        <table class="table table-responsive table-bordered table-striped">
+            <tr>
+                <th>
+                    name
+                </th>
+                <td>
+                    <input type="text" name="username">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    password
+                </th>
+                <td>
+                    <input type="text" name="password">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    character class
+                </th>
+                <td>
+                    <select name="characterClass" class="form-control" id="dropDownList">
+                        <option value="0">select option</option>
+                        <option th:each="classNames : ${classNames}" th:value="${classNames}" th:text="${classNames}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <button type="submit">save</button>
+                </th>
+            </tr>
+        </table>
+
+    </form>
+
+
+</div>
+
+
+</body>
+</html>
+
+
+
+
+
+

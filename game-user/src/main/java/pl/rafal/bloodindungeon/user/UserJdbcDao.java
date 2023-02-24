@@ -26,7 +26,6 @@ public class UserJdbcDao implements UserDao {
     @Override
     public List<User> getAllUsers() {
         String sql = "SELECT * FROM user";
-
         return jdbcTemplate.getJdbcOperations().query(sql, new UserMapper());
     }
 

@@ -1,24 +1,27 @@
 package pl.rafal.bloodindungeon.user;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.rafal.bloodindungeon.user.exception.DaoException;
 import pl.rafal.bloodindungeon.user.exception.ServiceLayerException;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
     private final UserDao userDao;
+    private final PasswordEncoder passwordEncoder;
 
     public List<User> getAllUsers() {
         return userDao.getAllUsers();
     }
 
 
-    User getUserById(int id) {
+    public User getUserById(int id) {
         return userDao.getUserById(id);
     }
 
@@ -26,7 +29,26 @@ public class UserService {
         return userDao.getUserByUsername(username);
     }
 
-    public void saveUser(String username, String characterClass) throws ServiceLayerException {
+    public void saveUser(String username, String characterClass, String password) throws ServiceLayerException {
+
+        if (password == null || password.isEmpty()) {
+            password = String.valueOf(UUID.randomUUID());
+        }
+        User user = buildUser(username, characterClass, password);
+        save(user);
+    }
+
+    public void save(User user) throws ServiceLayerException {
+        try {
+            userDao.saveUser(user);
+        } catch (DaoException ex) {
+            throw new ServiceLayerException(ex.getMessage());
+        }
+    }
+
+    public User buildUser(String username, String characterClass, String password) {
+
+        password = passwordEncoder.encode(password);
         User user = User.builder()
                 .username(username)
                 .characterClass(CharacterClass.valueOf(characterClass))
@@ -37,14 +59,9 @@ public class UserService {
                 .exp(1000)
                 .hp(100)
                 .intelligence(1)
-                // only for tests
-                .password("password")
+                .password(password)
                 .build();
-        try {
-            userDao.saveUser(user);
-        } catch (DaoException ex) {
-            throw new ServiceLayerException(ex.getMessage());
-        }
+        return user;
     }
 
     public boolean deleteUser(int id) {
