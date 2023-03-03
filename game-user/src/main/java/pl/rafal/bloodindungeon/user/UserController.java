@@ -30,7 +30,7 @@ public class UserController {
     @PostMapping("/add")
     String saveUser(@RequestParam String surname, @RequestParam String characterClass, Model model) {
         try {
-            if(Objects.equals(characterClass, "0")){
+            if (Objects.equals(characterClass, "0")) {
                 model.addAttribute("users", userService.getAllUsers());
                 model.addAttribute("success", "You need choose one of existing character class");
                 return "allUsers";
@@ -48,19 +48,25 @@ public class UserController {
 
     @GetMapping("/getAll")
     String getAllUsers(Model model) {
+        System.out.println("Hello");
         model.addAttribute("users", userService.getAllUsers());
+        System.out.println(userService.getAllUsers());
         return "allUsers";
     }
 
     @PostMapping("/delete")
     String deleteUser(Model model, @RequestParam("userId") int userId) {
         boolean isDeleted = userService.deleteUser(userId);
+        System.out.println("Hello 2 ");
         if (isDeleted) {
+
             model.addAttribute("successDeletion",
                     "User deletion success");
+            log.info("User " + userId + " deleted succesfully");
         } else {
             model.addAttribute("successDeletion",
                     "User deletion failed");
+            log.info("User " + userId + " deletion failed");
         }
 
 
@@ -68,20 +74,20 @@ public class UserController {
         return "allUsers";
     }
 
-//    @PostMapping("/update")
+    //    @PostMapping("/update")
 //    String updateUser(Model model, UUID userId, User user){
 //        userService.saveUser(user);
 //        model.addAttribute("users", userService.getAllUsers());
 //        return "allUsers";
 //    }
     @GetMapping("/registration")
-    String registrationForm(Model model){
+    String registrationForm(Model model) {
         List<Enum<CharacterClass>> classNames = new ArrayList(List.of(CharacterClass.values()));
         model.addAttribute("classNames", classNames);
         return "registrationForm";
     }
 
-//    @PostMapping("/registration")
+    //    @PostMapping("/registration")
 //    String registerUser(Model model, @RequestBody RegistrationUser registrationUser) throws ServiceLayerException {
 //        System.out.println(registrationUser);
 //        userService.saveUser(registrationUser.getUsername(),
