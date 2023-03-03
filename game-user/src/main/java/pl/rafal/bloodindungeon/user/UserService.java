@@ -14,7 +14,6 @@ import java.util.UUID;
 public class UserService {
 
     private final UserDao userDao;
-    private final PasswordEncoder passwordEncoder;
 
     public List<User> getAllUsers() {
         return userDao.getAllUsers();
@@ -48,7 +47,7 @@ public class UserService {
 
     public User buildUser(String username, String characterClass, String password) {
 
-        password = passwordEncoder.encode(password);
+        // powinien tu być password encoder
         User user = User.builder()
                 .username(username)
                 .characterClass(CharacterClass.valueOf(characterClass))
