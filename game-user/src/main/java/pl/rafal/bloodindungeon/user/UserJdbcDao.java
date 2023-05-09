@@ -1,14 +1,12 @@
 package pl.rafal.bloodindungeon.user;
 
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.stereotype.Repository;
 import pl.rafal.bloodindungeon.user.exception.RecordNotFoundException;
 import pl.rafal.bloodindungeon.user.exception.SaveUserFailedException;
-
 
 import javax.sql.DataSource;
 import java.util.List;
@@ -38,14 +36,14 @@ public class UserJdbcDao implements UserDao {
 
     @Override
     public User getUserByUsername(String username) {
-        String sql = " SELECT * FROM user WHERE surname=?";
-        return (User) jdbcTemplate.getJdbcOperations().query(sql, new UserMapper(), username);
+        String sql = " SELECT * FROM users WHERE username=?";
+        return jdbcTemplate.getJdbcOperations().queryForObject(sql, new UserMapper(), username);
     }
 
     @Override
     public void saveUser(User user) {
-        String sql = "INSERT INTO user (USERNAME, PASSWORD, CHARACTERCLASS, USERLVL, USERBALANCE, EXP, HP, ATTACK, DEFENCE, INTELLIGENCE)" +
-                " VALUES (:username,:password,:characterClass,:userLvl,:userBalance,:exp,:hp,:attack,:defence,:intelligence)";
+        String sql = "INSERT INTO user (USERNAME, PASSWORD, CHARACTERCLASS, USERLVL, USERBALANCE, EXP, HP, ATTACK, DEFENCE, INTELLIGENCE, EMAIL)" +
+                " VALUES (:username,:password,:characterClass,:userLvl,:userBalance,:exp,:hp,:attack,:defence,:intelligence, :email)";
 
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("username", user.getUsername());
@@ -58,6 +56,7 @@ public class UserJdbcDao implements UserDao {
         params.addValue("attack", user.getAttack());
         params.addValue("defence", user.getDefence());
         params.addValue("intelligence", user.getIntelligence());
+        params.addValue("email", user.getEmail());
 
         int update = jdbcTemplate.update(sql, params);
         if (update != 1) {
@@ -73,7 +72,6 @@ public class UserJdbcDao implements UserDao {
         return update == 1;
     }
 
-    // margin-left: 50% - połowa zdjęcia (1/2 image)
     @Override
     public void deleteUserByUsername(String username) {
         String sql = "DELETE FROM user WHERE username = ?";
@@ -107,6 +105,12 @@ public class UserJdbcDao implements UserDao {
             }
             throw new RecordNotFoundException(("User level was not were"));
         });
+    }
+
+    @Override
+    public void updateUserBalance(String username, Double money) {
+        String sql = "UPDATE users SET USERBALANCE = USERBALANCE + ? WHERE USERNAME = ?";
+        jdbcTemplate.getJdbcOperations().update(sql, money, username);
     }
 
     @Override

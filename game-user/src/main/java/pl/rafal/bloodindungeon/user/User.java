@@ -21,5 +21,6 @@ public class User {
     private int attack;
     private int defence;
     private int intelligence;
+    private String email;
 
 }

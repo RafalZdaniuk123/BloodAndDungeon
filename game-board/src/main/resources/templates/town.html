@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Town</title>
+    <!--    <link rel="stylesheet"-->
+    <!--          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">-->
+    <!--    <link rel="stylesheet" type="text/css" href="../static/css/main.css"/>-->
+    <link rel="stylesheet" type="text/css" th:href="@{../static/css/main.css}" />
+    <!--          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"-->
+    <!--          crossorigin="anonymous">-->
+</head>
+<body>
+
+
+<nav class="navbar navbar-dark bg-dark">
+    <table class="table table-responsive table-bordered table-striped">
+        <tr>
+            <td>
+                <a href="/game/user-stat"><p th:text="${player.username}"></p></a>
+            </td>
+            <td>
+                <p th:text="${player.characterClass}"></p>
+            </td>
+            <td>
+                <span>lvl: <span th:text="${player.userLvl}"></span></span>
+            </td>
+            <td>
+                <span>$ <span th:text="${player.userBalance}"></span></span>
+            </td>
+        </tr>
+    </table>
+</nav>
+
+<table>
+    <tr>
+        <th>
+            <a href="/lottery">check a lottery</a>
+        </th>
+    </tr>
+</table>
+</body>
+</html>

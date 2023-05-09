@@ -1,4 +1,4 @@
-package pl.rafal.bloodindungeon.shop;
+package pl.rafal.bloodindungeon;
 
 public class Main {
     public static void main(String[] args) {

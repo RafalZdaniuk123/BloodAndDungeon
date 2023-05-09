@@ -68,6 +68,11 @@ public class UserInMemoryDaoImpl implements UserDao {
         return users.get(id).getCharacterClass().toString();
     }
 
+    @Override
+    public void updateUserBalance(String username, Double money) {
+        
+    }
+
     // TODO Zrobić jakieś wczytywanie sekwencji
     private int getId() {
         return 2;

@@ -27,8 +27,32 @@
             <artifactId>game-security</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>pl.rafal.bloodindungeon</groupId>
+            <artifactId>game-board</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>pl.rafal.bloodindungeon</groupId>
+            <artifactId>magic-shop</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>pl.rafal.bloodindungeon</groupId>
+            <artifactId>dungeon</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>pl.rafal.bloodindungeon</groupId>
+            <artifactId>lottery</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>pl.rafal.bloodindungeon</groupId>
+            <artifactId>items</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>

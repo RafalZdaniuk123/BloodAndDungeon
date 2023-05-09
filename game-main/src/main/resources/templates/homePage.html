@@ -1,29 +1,48 @@
 <!DOCTYPE html>
-
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:ifsec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <title>strona użytkownika</title>
-
-    <style>
-h1 {
-  border-style: inset;
-  border-width: 7px;
-  border-color: black;
-}
-
-div {
-  border-style: inset;
-  border-width: 7px;
-  border-color: darkgreen;
-}
-
-    </style>
+    <link rel="stylesheet" type="text/css" th:href="@{../static/css/main.css}" />
+    <script type="text/javascript" th:src="@{/js/actions.js}"></script>
 </head>
 
 <body>
+<div th:if="${username} != anonymousUser">
+    <table>
+        <tr>
+            <th>
+                <a href="/logout">Sign out</a>
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <p>Welcome <span th:text="${username}"></span>!</p>
+            </th>
+        </tr>
+    </table>
+</div>
+<div th:unless="${username} != anonymousUser">
+<table>
+    <tr>
+        <th>
+            <a href="/login">Sign in</a>
+        </th>
+        <th>
+            <a href="/user/registration">Sign on</a>
+        </th>
+    </tr>
+    <tr>
+        <th>
+           <p>Welcome Stranger, come and join us !</p>
+        </th>
+    </tr>
+</table>
+</div>
 
-<h1>Welcome Stranger</h1>
+<h1>Welcome </h1>
+<h1></h1>
 
 <div> It is a home page</div>
 

@@ -1,7 +1,6 @@
 package pl.rafal.bloodindungeon.user;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.rafal.bloodindungeon.user.exception.DaoException;
 import pl.rafal.bloodindungeon.user.exception.ServiceLayerException;
@@ -19,21 +18,20 @@ public class UserService {
         return userDao.getAllUsers();
     }
 
-
     public User getUserById(int id) {
         return userDao.getUserById(id);
     }
 
-    User getUserByUsername(String username) {
+    public User getUserByUsername(String username) {
         return userDao.getUserByUsername(username);
     }
 
-    public void saveUser(String username, String characterClass, String password) throws ServiceLayerException {
+    public void saveUser(String username, String characterClass, String password, String email) throws ServiceLayerException {
 
         if (password == null || password.isEmpty()) {
             password = String.valueOf(UUID.randomUUID());
         }
-        User user = buildUser(username, characterClass, password);
+        User user = buildUser(username, characterClass, password, email);
         save(user);
     }
 
@@ -45,7 +43,7 @@ public class UserService {
         }
     }
 
-    public User buildUser(String username, String characterClass, String password) {
+    public User buildUser(String username, String characterClass, String password, String email) {
 
         // powinien tu być password encoder
         User user = User.builder()
@@ -59,12 +57,17 @@ public class UserService {
                 .hp(100)
                 .intelligence(1)
                 .password(password)
+                .email(email)
                 .build();
         return user;
     }
 
     public boolean deleteUser(int id) {
         return userDao.deleteUserById(id);
+    }
+
+    public void updateUserBalance(String username, Double money){
+         userDao.updateUserBalance(username, money);
     }
 
 //    void registerUser(RegistrationUser registrationUser) {
