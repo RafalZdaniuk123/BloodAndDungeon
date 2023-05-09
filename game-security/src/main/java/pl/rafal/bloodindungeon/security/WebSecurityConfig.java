@@ -8,13 +8,12 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
 import javax.sql.DataSource;
 
-//employee
+//user
 //pass
 @Configuration
 @EnableWebSecurity
@@ -28,14 +27,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new JdbcTemplate(dataSource);
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(jdbcUserDetailsManager()).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(jdbcUserDetailsManager()).passwordEncoder(passwordEncoder);
     }
 
     @Bean
@@ -48,9 +44,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().authenticated()
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers(
+                        "/resources/**", "/resources/", "/resources/*", "/static/",
+                        "/static/**", "/static/*", "/css/**", "/js/**", "/css/*", "/js/*", "/css/", "/js/", "/images/**")
+                .permitAll()
+                .antMatchers("/")
+                .permitAll()
+                .anyRequest().authenticated()
                 .and().formLogin()
-                .and().logout().logoutSuccessUrl("/home").permitAll();
+                .defaultSuccessUrl("/game/town")
+                .and().logout().logoutSuccessUrl("/").permitAll();
     }
-
 }

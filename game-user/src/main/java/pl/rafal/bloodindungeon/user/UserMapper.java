@@ -4,13 +4,11 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.UUID;
 
 public class UserMapper implements RowMapper<User> {
     @Override
     public User mapRow(ResultSet rs, int rowNum) throws SQLException {
         return User.builder()
-                .id(rs.getInt("id"))
                 .username(rs.getString("USERNAME"))
                 .password(rs.getString("PASSWORD"))
                 .characterClass(CharacterClass.valueOf(rs.getString("CHARACTERCLASS")))
@@ -21,6 +19,7 @@ public class UserMapper implements RowMapper<User> {
                 .attack(rs.getInt("ATTACK"))
                 .defence(rs.getInt("DEFENCE"))
                 .intelligence(rs.getInt("INTELLIGENCE"))
+                .email(rs.getString("EMAIL"))
                 .build();
     }
 }

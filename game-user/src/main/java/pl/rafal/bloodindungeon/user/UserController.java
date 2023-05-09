@@ -28,14 +28,14 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    String saveUser(@RequestParam String surname, @RequestParam String characterClass, Model model) {
+    String saveUser(@RequestParam String surname, @RequestParam String email, @RequestParam String characterClass, Model model) {
         try {
             if (Objects.equals(characterClass, "0")) {
                 model.addAttribute("users", userService.getAllUsers());
                 model.addAttribute("success", "You need choose one of existing character class");
                 return "allUsers";
             }
-            userService.saveUser(surname, characterClass, null);
+            userService.saveUser(surname, characterClass, null, email);
             model.addAttribute("success", "User added successfully");
             log.info("User " + surname + " added succesfully");
         } catch (ServiceLayerException ex) {
@@ -43,7 +43,7 @@ public class UserController {
             log.error("User " + surname + " adding failed");
         }
         model.addAttribute("users", userService.getAllUsers());
-        return "redirect:/user/getAll";
+        return "allUsers";
     }
 
     @GetMapping("/getAll")
@@ -99,12 +99,14 @@ public class UserController {
 // Check how can I use Model in Request    @RequestModel
     @PostMapping("/registration")
     String registerUser(Model model,
+                        @RequestParam String email,
                         @RequestParam String username,
                         @RequestParam String characterClass,
                         @RequestParam String password) throws ServiceLayerException {
         userService.saveUser(username,
                 characterClass,
-                password);
+                password,
+                email);
         model.addAttribute("users", userService.getAllUsers());
         return "allUsers";
     }

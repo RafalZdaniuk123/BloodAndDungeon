@@ -1,0 +1,50 @@
+--adding a new fields to users table in database
+ALTER TABLE `users` ADD `EMAIL` VARCHAR(100) NOT NULL AFTER `enabled`, ADD `CHARACTERCLASS` VARCHAR(50) NOT NULL AFTER `EMAIL`, ADD `USERLVL` INT NOT NULL DEFAULT '1' AFTER `CHARACTERCLASS`, ADD `USERBALANCE` DOUBLE NOT NULL DEFAULT '1000' AFTER `USERLVL`, ADD `EXP` INT NOT NULL DEFAULT '1000' AFTER `USERBALANCE`, ADD `HP` INT NOT NULL DEFAULT '100' AFTER `EXP`, ADD `ATTACK` INT NOT NULL DEFAULT '1' AFTER `HP`, ADD `DEFENCE` INT NOT NULL DEFAULT '1' AFTER `ATTACK`, ADD `INTELLIGENCE` INT NOT NULL DEFAULT '1' AFTER `DEFENCE`;
+
+
+
+
+
+--Add items table
+CREATE TABLE `dangeongame`.`items` (`id` SERIAL NOT NULL , `type` VARCHAR(100) NOT NULL , `defence` INT NOT NULL , `attack` INT NOT NULL , `inteligence` INT NOT NULL , `chance_to_win` INT NOT NULL , `min_level` INT NOT NULL , `price` INT NOT NULL , `enable` BOOLEAN NOT NULL , `ice` INT NOT NULL , `fire` INT NOT NULL , `toxic` INT NOT NULL ) ENGINE = InnoDB;
+
+
+CREATE TABLE `dangeongame`.`items` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `type` VARCHAR(100) NOT NULL,
+  `defence` INT NOT NULL,
+  `attack` INT NOT NULL,
+  `inteligence` INT NOT NULL,
+  `chance_to_win` INT NOT NULL,
+  `min_level` INT NOT NULL,
+  `price` INT NOT NULL,
+  `enable` BOOLEAN NOT NULL,
+  `ice` INT NOT NULL,
+  `fire` INT NOT NULL,
+  `toxic` INT NOT NULL
+) ENGINE = InnoDB;
+
+
+
+--equipment
+CREATE TABLE `dangeongame`.`equipment` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `item_id` INT NOT NULL,
+  `username` VARCHAR(255) NOT NULL,
+  FOREIGN KEY (`item_id`) REFERENCES `dangeongame`.`items`(`id`),
+  FOREIGN KEY (`username`) REFERENCES `dangeongame`.`users`(`username`)
+) ENGINE = InnoDB;
+
+
+
+INSERT INTO `items` (`type`, `defence`, `attack`, `inteligence`, `chance_to_win`, `min_level`, `price`, `enable`, `ice`, `fire`, `toxic`)
+VALUES ('Sword', 5, 10, 0, 0, 1, 100, 1, 0, 0, 0);
+
+INSERT INTO `items` (`type`, `defence`, `attack`, `inteligence`, `chance_to_win`, `min_level`, `price`, `enable`, `ice`, `fire`, `toxic`)
+VALUES ('Bow', 0, 20, 0, 0, 3, 200, 1, 0, 1, 0);
+
+INSERT INTO `items` (`type`, `defence`, `attack`, `inteligence`, `chance_to_win`, `min_level`, `price`, `enable`, `ice`, `fire`, `toxic`)
+VALUES ('Helmet', 10, 0, 0, 0, 2, 150, 1, 1, 0, 0);
+
+INSERT INTO `items` (`type`, `defence`, `attack`, `inteligence`, `chance_to_win`, `min_level`, `price`, `enable`, `ice`, `fire`, `toxic`)
+VALUES ('Shield', 20, 0, 0, 0, 4, 300, 1, 0, 0, 1);

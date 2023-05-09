@@ -1,0 +1,86 @@
+<!DOCTYPE html >
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <title>Player stats</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <head>
+
+<body>
+
+
+<table class="table table-responsive table-bordered table-striped">
+    <tr>
+        <th>
+            username
+        </th>
+        <th>
+            character
+        </th>
+        <th>
+            level
+        </th>
+        <th>
+            balance
+        </th>
+        <th>
+            experience
+        </th>
+        <th>
+            health points
+        </th>
+        <th>
+            attack
+        </th>
+        <th>
+            defence
+        </th>
+        <th>
+            intelligence
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <p th:text="${player.username}"></p>
+        </td>
+        <td>
+            <p th:text="${player.characterClass}"></p>
+        </td>
+        <td>
+            <p th:text="${player.userLvl}"></p>
+        </td>
+        <td>
+            <p th:text="${player.userBalance}"></p>
+        </td>
+        <td>
+            <p th:text="${player.exp}"></p>
+        </td>
+        <td>
+            <p th:text="${player.hp}"></p>
+        </td>
+        <td>
+            <p th:text="${player.attack}"></p>
+        </td>
+        <td>
+            <p th:text="${player.defence}"></p>
+        </td>
+        <td>
+            <p th:text="${player.intelligence}"></p>
+        </td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <th>
+            <a href="/game/town">go back</a>
+        </th>
+    </tr>
+</table>
+
+</body>
+</html>
